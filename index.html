@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حاسبة أرباح المتجر السريعة</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #f4f7f6; text-align: center; padding: 50px; }
+        .calculator { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: inline-block; width: 300px; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
+        button { background-color: #28a745; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 95%; }
+        button:hover { background-color: #218838; }
+        .result { margin-top: 20px; font-weight: bold; font-size: 18px; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>حاسبة الأرباح 💰</h2>
+    <label>تكلفة المنتج عليك (ريال):</label>
+    <input type="number" id="cost" placeholder="مثال: 50">
+    
+    <label>سعر البيع للزبون (ريال):</label>
+    <input type="number" id="price" placeholder="مثال: 100">
+    
+    <button onclick="calculateProfit()">احسب الربح</button>
+    
+    <div class="result" id="result">النتيجة بتظهر هنا</div>
+</div>
+
+<script>
+    function calculateProfit() {
+        let cost = parseFloat(document.getElementById('cost').value);
+        let price = parseFloat(document.getElementById('price').value);
+        
+        if (isNaN(cost) || isNaN(price)) {
+            document.getElementById('result').innerText = "الرجاء أدخل أرقام صحيحة!";
+            return;
+        }
+        
+        let profit = price - cost;
+        let percentage = ((profit / cost) * 100).toFixed(1);
+        
+        if (profit > 0) {
+            document.getElementById('result').innerHTML = `ربحك الصافي: <span style="color:green;">${profit} ريال</span> <br> نسبة الربح: ${percentage}%`;
+        } else if (profit === 0) {
+            document.getElementById('result').innerText = "لا يوجد ربح ولا خسارة (راس بـ راس).";
+        } else {
+            document.getElementById('result').innerHTML = `عندك خسارة: <span style="color:red;">${profit} ريال</span>`;
+        }
+    }
+</script>
+
+</body>
+</html>
